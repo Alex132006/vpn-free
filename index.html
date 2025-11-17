@@ -159,6 +159,52 @@
             transform: translateX(0);
         }
     }
+
+    /* Styles pour le message pirate */
+    .pirate-message {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        background: rgba(0, 0, 0, 0.9);
+        color: #ff0000;
+        padding: 30px 50px;
+        border: 3px solid #ff0000;
+        border-radius: 15px;
+        font-family: 'Courier New', monospace;
+        font-size: 28px;
+        font-weight: bold;
+        text-align: center;
+        z-index: 1000;
+        box-shadow: 0 0 50px rgba(255, 0, 0, 0.7);
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .pirate-message.show {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .pirate-message h3 {
+        margin: 0;
+        line-height: 1.4;
+        text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+    }
+
+    /* Overlay pour assombrir l'arrière-plan */
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 999;
+        display: none;
+    }
+
+    .overlay.show {
+        display: block;
+    }
 </style>
 
 <body>
@@ -170,7 +216,6 @@
         <h3>Toujours prêt pour vous servir</h3>
     </div>
     <div class="vpn2">
-        <!-- Retirer le <a href=""> pour éviter le rechargement de page -->
         <div class="vpn3" id="vpnButton">
             <i class="fa-solid fa-power-off"></i>
         </div>
@@ -180,24 +225,47 @@
         <img src="image copy 2.png" alt="">
     </div>
 
+    <!-- Overlay pour assombrir l'arrière-plan -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Message pirate -->
+    <div class="pirate-message" id="pirateMessage">
+        <h3>SALUT <br> ALEX t'a P*i*r*a*t*é</h3>
+    </div>
+
     <script>
-        // JavaScript corrigé
         document.getElementById('vpnButton').addEventListener('click', function (e) {
-            // Empêcher le comportement par défaut si jamais
             e.preventDefault();
 
             // Basculer la classe noir-actif
             this.classList.toggle('noir-actif');
 
-            // Optionnel : Changer le texte du statut
+            // Changer le texte du statut
             const statusElement = document.querySelector('.vpn1 h3');
             if (this.classList.contains('noir-actif')) {
                 statusElement.textContent = 'VPN Activé - Vous êtes protégé';
                 statusElement.style.color = '#00ff00';
+                
+                // Afficher le message pirate après 2 secondes
+                setTimeout(function() {
+                    document.getElementById('overlay').classList.add('show');
+                    document.getElementById('pirateMessage').classList.add('show');
+                }, 2000);
+                
             } else {
                 statusElement.textContent = 'Toujours prêt pour vous servir';
                 statusElement.style.color = 'aliceblue';
+                
+                // Cacher le message pirate si désactivé
+                document.getElementById('overlay').classList.remove('show');
+                document.getElementById('pirateMessage').classList.remove('show');
             }
+        });
+
+        // Optionnel : Cacher le message en cliquant sur l'overlay
+        document.getElementById('overlay').addEventListener('click', function() {
+            this.classList.remove('show');
+            document.getElementById('pirateMessage').classList.remove('show');
         });
     </script>
 </body>
