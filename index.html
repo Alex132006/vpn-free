@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vpn</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background: rgb(4, 76, 0);
+    }
+
+    .fa-share {
+        color: #ffffff;
+        position: relative;
+        top: 20px;
+        right: -340px;
+        width: 40px;
+        height: 40px;
+        border: 1px solid #ffffff;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .fa-share:hover {
+        transform: translateY(-2px);
+    }
+
+    .type h2 {
+        color: aqua;
+        font-size: 40px;
+        text-align: center;
+    }
+
+    .vpn1 {
+        text-align: center;
+        color: aliceblue;
+        font-family: cursive;
+        position: relative;
+        top: 0px;
+    }
+
+    .vpn2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 100px;
+    }
+
+    /* Styles pour le bouton VPN */
+    .vpn3 {
+        width: 200px;
+        height: 200px;
+        background: #ffffffc0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 100px;
+        position: relative;
+        top: 100px;
+        cursor: pointer;
+        text-decoration: underline;
+        border: 1px solid #ffffff;
+        transition: all 0.3s ease;
+    }
+
+    .vpn3:hover {
+        background: #000000ac;
+        transform: translateY(-2px);
+    }
+
+    /* Classe pour l'état noir - ACTIF */
+    .vpn3.noir-actif {
+        border: 2px solid #00ff00 !important;
+        color: #ffffff !important;
+        transform: scale(0.95);
+        box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+    }
+
+    .vpn3.noir-actif:hover {
+        background: #111111 !important;
+        transform: scale(0.97) translateY(-1px);
+    }
+
+    /* Changement de couleur de l'icône quand actif */
+    .vpn3.noir-actif .fa-power-off {
+        color: #00ff00 !important;
+        animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.1);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .fa-power-off {
+        font-size: 60px;
+        color: #000000;
+        transition: color 0.3s ease;
+    }
+
+    .footer-container {
+        width: 100%;
+        height: 100px;
+        border: 1px solid #ffffff;
+    }
+
+    .footer {
+        display: flex;
+        width: 200%;
+        height: 100%;
+        animation: glissement-footer 6s infinite ease-in-out;
+        position: relative;
+        top: 150px;
+    }
+
+    .footer img {
+        width: 50%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 30px;
+        margin: 30px;
+    }
+
+    @keyframes glissement-footer {
+        0% {
+            transform: translateX(0);
+        }
+
+        45% {
+            transform: translateX(0);
+        }
+
+        50% {
+            transform: translateX(-50%);
+        }
+
+        95% {
+            transform: translateX(-50%);
+        }
+
+        100% {
+            transform: translateX(0);
+        }
+    }
+</style>
+
+<body>
+    <i class="fa-solid fa-share"></i>
+    <div class="type">
+        <h2>VPN gratuit</h2>
+    </div>
+    <div class="vpn1">
+        <h3>Toujours prêt pour vous servir</h3>
+    </div>
+    <div class="vpn2">
+        <!-- Retirer le <a href=""> pour éviter le rechargement de page -->
+        <div class="vpn3" id="vpnButton">
+            <i class="fa-solid fa-power-off"></i>
+        </div>
+    </div>
+    <div class="footer">
+        <img src="image copy 2.png" alt="">
+        <img src="image copy 2.png" alt="">
+    </div>
+
+    <script>
+        // JavaScript corrigé
+        document.getElementById('vpnButton').addEventListener('click', function (e) {
+            // Empêcher le comportement par défaut si jamais
+            e.preventDefault();
+
+            // Basculer la classe noir-actif
+            this.classList.toggle('noir-actif');
+
+            // Optionnel : Changer le texte du statut
+            const statusElement = document.querySelector('.vpn1 h3');
+            if (this.classList.contains('noir-actif')) {
+                statusElement.textContent = 'VPN Activé - Vous êtes protégé';
+                statusElement.style.color = '#00ff00';
+            } else {
+                statusElement.textContent = 'Toujours prêt pour vous servir';
+                statusElement.style.color = 'aliceblue';
+            }
+        });
+    </script>
+</body>
+
+</html>
